@@ -14,7 +14,6 @@ namespace ConsoleSearch
         {
             mDatabase = database;
             mWords = mDatabase.GetAllWords();
-
         }
 
         /* Perform search of documents containing words from query. The result will

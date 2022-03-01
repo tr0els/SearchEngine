@@ -3,8 +3,7 @@ namespace CommonStuff
 {
     public class Config
     {
-        public static String FOLDER = @"/Users/ole/data";
-
-        public static String DATABASE = @"/Users/ole/database/searchDB.db";
+        public static String FOLDER = @"../../../../Data/Sample";
+        public static String DATABASE = @"../../../../Database/searchDB.db";
     }
 }

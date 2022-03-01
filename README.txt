@@ -13,3 +13,12 @@ The searcher is refactored such that SearchLogic contains all the logic and are 
 for a Y-spilt.
 
 
+
+### Notes ###
+
+# Indexer
+Crawls the txt files, parses the content and handles documents, words and counting.
+The data is inserted/seeded into the database.
+
+# ConsoleSearch
+Searches for words querying (reading only) from the same database as the indexer used.

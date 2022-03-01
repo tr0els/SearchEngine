@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using CommonStuff;
 using CommonStuff.BE;
 using Microsoft.Data.Sqlite;
 
@@ -10,17 +11,19 @@ namespace Indexer
         private SqliteConnection _connection;
         public Database()
         {
-     
             var connectionStringBuilder = new SqliteConnectionStringBuilder();
-
             connectionStringBuilder.Mode = SqliteOpenMode.ReadWriteCreate;
-           
-            connectionStringBuilder.DataSource = "/Users/ole/database/searchDB.db";
-
+            connectionStringBuilder.DataSource = Config.DATABASE;
 
             _connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
-
             _connection.Open();
+
+            // Sqlite insert speed optimization
+            // https://www.sqlite.org/pragma.html#pragma_synchronous
+            // https://sqlite.org/wal.html
+            // https://docs.microsoft.com/en-us/dotnet/standard/data/sqlite/compare#connection-strings
+            //Execute("PRAGMA synchronous = 'off'");
+            //Execute("PRAGMA journal_mode = 'wal'");
 
             Execute("DROP TABLE IF EXISTS Occ");
 
@@ -33,6 +36,8 @@ namespace Indexer
             Execute("CREATE TABLE Occ(wordId INTEGER, docId INTEGER, "
                   + "FOREIGN KEY (wordId) REFERENCES word(id), "
                   + "FOREIGN KEY (docId) REFERENCES document(id))");
+            
+            // Can index maybe instead be created once after all data is inserted?
             //Execute("CREATE INDEX word_index ON Occ (wordId)");
         }
 
@@ -60,7 +65,6 @@ namespace Indexer
                 command.Parameters.Add(paramId);
 
                 // Insert all entries in the res
-                
                 foreach (var p in res)
                 {
                     paramName.Value = p.Key;
@@ -101,9 +105,10 @@ namespace Indexer
                 transaction.Commit();
             }
         }
+
+        // unused method
         public void InsertWord(int id, string word)
         {
-
             var insertCmd = new SqliteCommand("INSERT INTO word(id, name) VALUES(@id,@name)");
             insertCmd.Connection = _connection;
 
@@ -114,12 +119,10 @@ namespace Indexer
             insertCmd.Parameters.Add(pCount);
 
             insertCmd.ExecuteNonQuery();
-
         }
 
         public void InsertDocument(BEDocument doc)
         {
-
             var insertCmd = new SqliteCommand("INSERT INTO document(id, url, idxTime, creationTime) VALUES(@id,@url, @idxTime, @creationTime)");
             insertCmd.Connection = _connection;
 
@@ -135,9 +138,7 @@ namespace Indexer
             var pCreationTime = new SqliteParameter("creationTime", doc.mCreationTime);
             insertCmd.Parameters.Add(pCreationTime);
 
-
             insertCmd.ExecuteNonQuery();
-
         }
 
         public Dictionary<string, int> GetAllWords()

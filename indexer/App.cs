@@ -15,14 +15,12 @@ namespace Indexer
         {
             Database db = new Database();
             Crawler crawler = new Crawler(db);
-            
 
             var root = new DirectoryInfo(Config.FOLDER);
 
             DateTime start = DateTime.Now;
 
-            crawler.IndexFilesIn(root, new List<string> { ".txt"});
-            
+            crawler.IndexFilesIn(root, new List<string> {".txt"});
 
             TimeSpan used = DateTime.Now - start;
             Console.WriteLine("DONE! used " + used.TotalMilliseconds);

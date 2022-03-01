@@ -12,15 +12,10 @@ namespace ConsoleSearch
         public Database()
         {
             var connectionStringBuilder = new SqliteConnectionStringBuilder();
-
             connectionStringBuilder.DataSource = Config.DATABASE;
 
-
             _connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
-
             _connection.Open();
-
-            
         }
 
         private void Execute(string sql)
@@ -29,10 +24,6 @@ namespace ConsoleSearch
             cmd.CommandText = sql;
             cmd.ExecuteNonQuery();
         }
-
-
-
-
 
         // key is the id of the document, the value is number of search words in the document
         public List<KeyValuePair<int, int>> GetDocuments(List<int> wordIds)

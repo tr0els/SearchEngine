@@ -16,7 +16,7 @@ namespace Indexer
 
         public Crawler(Database db){ mdatabase = db; }
 
-        //Return a dictionary containing all words (as the key)in the file
+        //Return a dictionary containing all words (as the key) in the file
         // [f] and the value is the number of occurrences of the key in file.
         private ISet<string> ExtractWordsInFile(FileInfo f)
         {
@@ -75,15 +75,10 @@ namespace Indexer
                         }
                     }
                     mdatabase.InsertAllWords(newWords);
-
                     mdatabase.InsertAllOcc(newDoc.mId, GetWordIdFromWords(wordsInFile));
-
-
                 }
             foreach (var d in dir.EnumerateDirectories())
                 IndexFilesIn(d, extensions);
         }
-
-        
     }
 }
