@@ -1,18 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace ConsoleSearch
 {
     public class App
     {
+
+        HttpClient _client = new HttpClient();
+
         public App()
         {
         }
 
         public void Run()
         {
-            SearchLogic mSearchLogic = new SearchLogic(new Database());
-            
+            //SearchLogic mSearchLogic = new SearchLogic(new Database());
 
             Console.WriteLine("Console Search");
             
@@ -24,6 +28,10 @@ namespace ConsoleSearch
 
                 var query = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
                
+                //var start = DateTime.Now;
+                Task<HttpResponseMessage> response = _client.GetAsync("https://localhost:5003/numbers/");
+                String result = (response.Result.Content.ReadAsStringAsync().Result);
+
 
                 var result = mSearchLogic.Search(query, 10);
 
