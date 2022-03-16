@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using CommonStuff.BE;
 
-namespace SearchAPI
+namespace CommonStuff
 {
     /*
      * A data class representing the result of a search.

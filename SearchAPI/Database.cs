@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommonStuff;
+using CommonStuff.BE;
 using Microsoft.Data.Sqlite;
 
 namespace SearchAPI
@@ -11,7 +12,7 @@ namespace SearchAPI
         public Database()
         {
             var connectionStringBuilder = new SqliteConnectionStringBuilder();
-            connectionStringBuilder.DataSource = Config.DATABASE;
+            connectionStringBuilder.DataSource = "../Database/searchDB.db";
 
             _connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
             _connection.Open();

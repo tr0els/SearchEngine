@@ -13,7 +13,7 @@ namespace Indexer
         {
             var connectionStringBuilder = new SqliteConnectionStringBuilder();
             connectionStringBuilder.Mode = SqliteOpenMode.ReadWriteCreate;
-            connectionStringBuilder.DataSource = Config.DATABASE;
+            connectionStringBuilder.DataSource = "../../../../Database/searchDB.db"; //Config.DATABASE;
 
             _connection = new SqliteConnection(connectionStringBuilder.ConnectionString);
             _connection.Open();
