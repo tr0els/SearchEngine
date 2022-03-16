@@ -15,9 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SearchAPI", "SearchAPI\SearchAPI.csproj", "{22BF139E-C2C5-438E-BB25-67B34BD7B6C8}"
-	ProjectSection(ProjectDependencies) = postProject
-		{0042B50C-3B63-463F-A130-D83833E4056B} = {0042B50C-3B63-463F-A130-D83833E4056B}
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

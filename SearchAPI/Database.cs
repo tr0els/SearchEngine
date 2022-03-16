@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using CommonStuff;
-using CommonStuff.BE;
 using Microsoft.Data.Sqlite;
 
-namespace ConsoleSearch
+namespace SearchAPI
 {
     public class Database
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 //using CommonStuff.BE;
 
-namespace ConsoleSearch
+namespace SearchAPI
 {
     public class SearchLogic
     {

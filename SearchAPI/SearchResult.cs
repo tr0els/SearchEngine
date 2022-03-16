@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using CommonStuff.BE;
 
-namespace ConsoleSearch
+namespace SearchAPI
 {
     /*
      * A data class representing the result of a search.

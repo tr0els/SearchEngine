@@ -1,7 +1,7 @@
 ﻿using System;
 using CommonStuff.BE;
 
-namespace ConsoleSearch
+namespace SearchAPI
 {
     public class DocumentHit
     {
