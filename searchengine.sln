@@ -18,6 +18,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SearchAPI", "SearchAPI\Sear
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GatewayAPI", "GatewayAPI\GatewayAPI.csproj", "{C2EBD362-3245-4460-A928-4DBBA796E9B7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBalancerAPI", "LoadBalancerAPI\LoadBalancerAPI.csproj", "{C9D74B5C-20CA-48AD-911F-8A671B4B23D7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,10 @@ Global
 		{C2EBD362-3245-4460-A928-4DBBA796E9B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2EBD362-3245-4460-A928-4DBBA796E9B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2EBD362-3245-4460-A928-4DBBA796E9B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9D74B5C-20CA-48AD-911F-8A671B4B23D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9D74B5C-20CA-48AD-911F-8A671B4B23D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9D74B5C-20CA-48AD-911F-8A671B4B23D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9D74B5C-20CA-48AD-911F-8A671B4B23D7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
