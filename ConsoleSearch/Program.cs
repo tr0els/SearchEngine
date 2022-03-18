@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace ConsoleSearch
 {
@@ -6,7 +7,7 @@ namespace ConsoleSearch
     {
         static void Main(string[] args)
         {
-            new App().Run();
+            new App().RunAsync();
         }
     }
 }

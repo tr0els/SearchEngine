@@ -1,9 +1,9 @@
-﻿using CommonStuff;
-using System;
+﻿using System;
 using System.Collections.Generic;
-//using CommonStuff.BE;
+using CommonStuff;
+using CommonStuff.BE;
 
-namespace SearchAPI
+namespace SearchAPI.Controllers
 {
     public class SearchLogic
     {
@@ -15,6 +15,7 @@ namespace SearchAPI
         {
             mDatabase = database;
             mWords = mDatabase.GetAllWords();
+
         }
 
         /* Perform search of documents containing words from query. The result will
@@ -41,11 +42,18 @@ namespace SearchAPI
             // all the documentHit
             List<DocumentHit> docresult = new List<DocumentHit>();
             int idx = 0;
-            foreach (var doc in mDatabase.GetDocDetails(top))            
-                docresult.Add(new DocumentHit(doc, docIds[idx++].Value));
+            foreach (var doc in mDatabase.GetDocDetails(top))
+            {
+                var missing = mDatabase.WordsFromIds(mDatabase.getMissing(doc.mId, wordIds));
+                  
+                docresult.Add(new DocumentHit { Document = doc, NoOfHits = docIds[idx++].Value, Missing = missing });
+            }
 
-
-            return new SearchResult(query, docIds.Count, docresult, ignored, DateTime.Now - start);
+            return new SearchResult { Query = query,
+                                      Hits = docIds.Count,
+                                      DocumentHits = docresult,
+                                      Ignored = ignored,
+                                      TimeUsed = DateTime.Now - start };
         }
 
         private List<int> GetWordIds(String[] query, out List<string> outIgnored)

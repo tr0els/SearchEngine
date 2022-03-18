@@ -1,41 +1,24 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+
+
 
 namespace SearchAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("search")]
     public class SearchController : ControllerBase
     {
-        // GET: api/<ValuesController>
+        private static SearchLogic searchLogic = new SearchLogic(new Database());
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        [Route("{query}/{maxAmount}")]
+        public string SearchByQuery(string query, int maxAmount)
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<SearchController>/5
-        [HttpGet("{query},{limit}")]
-        public string Get(string[] query, int limit)
-        {
-            return String.Format("You searched for {0} with a limit of {1}", query, limit);
-        }
-
-        // POST api/<ValuesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
-
-        // PUT api/<ValuesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE api/<ValuesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            
+            var result = searchLogic.Search(query.Split(","), maxAmount);
+            var resultStr = JsonConvert.SerializeObject(result, Formatting.Indented);
+            return resultStr; 
         }
     }
 }

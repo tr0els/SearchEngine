@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CommonStuff;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -14,7 +16,7 @@ namespace ConsoleSearch
         {
         }
 
-        public void Run()
+        public void RunAsync()
         {
             //SearchLogic mSearchLogic = new SearchLogic(new Database());
 
@@ -27,13 +29,12 @@ namespace ConsoleSearch
                 if (input.Equals("q")) break;
 
                 var query = input.Split(" ", StringSplitOptions.RemoveEmptyEntries);
-               
-                //var start = DateTime.Now;
-                Task<HttpResponseMessage> response = _client.GetAsync("https://localhost:5003/numbers/");
-                String result = (response.Result.Content.ReadAsStringAsync().Result);
 
+                var response = _client.GetAsync("https://localhost:44307/search/" + String.Join(",",query) + "/10");
+                var resultStr = response.Result.Content.ReadAsStringAsync().Result;
+                var result = JsonConvert.DeserializeObject<SearchResult>(resultStr);
 
-                var result = mSearchLogic.Search(query, 10);
+                //var result = mSearchLogic.Search(query, 10);
 
                 if (result.Ignored.Count > 0) {
                     Console.WriteLine("Ignored: ");
