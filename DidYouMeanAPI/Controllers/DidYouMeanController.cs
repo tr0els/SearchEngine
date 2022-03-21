@@ -19,13 +19,18 @@ namespace DidYouMeanAPI.Controllers
         }
 
         [HttpGet(Name = "DidYouMean")]
-        public IEnumerable<DidYouMean> Get()
+        public async Task<DidYouMean> GetAsync()
         {
-            return Enumerable.Range(1, 5).Select(index => new DidYouMean
-            {
-                Words = Summaries.ToList()
-            })
-            .ToArray();
+            Console.WriteLine($"Starting at {DateTime.Now.TimeOfDay}");
+            DidYouMean words = await MySlowTask();
+            Console.WriteLine($"Done at {DateTime.Now.TimeOfDay}");
+            return words;
+        }
+
+        private async Task<DidYouMean> MySlowTask()
+        {
+            await Task.Delay(5000);
+            return new DidYouMean { Words = Summaries.ToList() };
         }
     }
 }

@@ -29,6 +29,11 @@ namespace LoadBalancerAPI.Controllers
         public async Task<IActionResult> Search(string query, int maxAmount)
             => await ProxyTo(_loadBalancer.NextService() + "/search/" + query + "/" + maxAmount);
 
+        [HttpGet]
+        [Route("DidYouMean")]
+        public async Task<IActionResult> DidYouMean()
+            => await ProxyTo(_loadBalancer.NextService() + "/DidYouMean");
+
         // redirect helper
         private async Task<ContentResult> ProxyTo(string url)
             => Content(await _httpClient.GetStringAsync(url));

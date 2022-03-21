@@ -26,7 +26,7 @@ namespace LoadBalancerAPI.Controllers
             _strategies = new Dictionary<string, ILoadBalancerStrategy>();
 
             // for easy testing set load balancer services and strategies at instantiation
-            if(_services.Count == 0) this.AddService("https://localhost:44307");
+            if(_services.Count == 0) this.AddService("https://localhost:44321");
 
             if(_strategies.Count == 0) 
             {
