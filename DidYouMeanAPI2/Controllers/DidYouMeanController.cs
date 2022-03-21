@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace DidYouMeanAPI.Controllers
+namespace DidYouMeanAPI2.Controllers
 {
     [ApiController]
     [Route("[controller]")]
@@ -11,10 +11,17 @@ namespace DidYouMeanAPI.Controllers
         "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
     };
 
+        private readonly ILogger<DidYouMeanController> _logger;
+
+        public DidYouMeanController(ILogger<DidYouMeanController> logger)
+        {
+            _logger = logger;
+        }
+
         [HttpGet(Name = "DidYouMean")]
         public async Task<DidYouMean> GetAsync()
         {
-            var name = "#1";
+            var name = "#2";
             Console.WriteLine($"{DateTime.Now.TimeOfDay} - DidYouMeanAPI {name} starting slow task");
             DidYouMean words = await MySlowTask();
             Console.WriteLine($"{DateTime.Now.TimeOfDay} - DidYouMeanAPI {name} done with slow task");

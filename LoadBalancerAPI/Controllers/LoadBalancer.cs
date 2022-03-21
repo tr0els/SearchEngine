@@ -29,7 +29,7 @@ namespace LoadBalancerAPI.Controllers
             if(_services.Count == 0)
             {
                 _services.Add("https://localhost:44321");
-                _services.Add("https://localhost:49159");
+                _services.Add("https://localhost:44390");
             }
 
             if(_strategies.Count == 0) 
