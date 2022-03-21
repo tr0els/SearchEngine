@@ -13,7 +13,7 @@ builder.Services.AddSwaggerGen();
 // Register IHttpClientFactory to configure and create HttpClient instances.
 builder.Services.AddHttpClient();
 
-// Setting load balancer as singleton app service together with a strategy
+// Setting load balancer as singleton app service with a default strategy
 builder.Services.AddSingleton<ILoadBalancerStrategy, RoundRobinStrategy>(); 
 builder.Services.AddSingleton(lb => new LoadBalancer(lb.GetRequiredService<ILoadBalancerStrategy>()));
 

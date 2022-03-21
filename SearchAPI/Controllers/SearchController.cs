@@ -18,7 +18,7 @@ namespace SearchAPI.Controllers
             
             var result = searchLogic.Search(query.Split(","), maxAmount);
             var resultStr = JsonConvert.SerializeObject(result, Formatting.Indented);
-            return resultStr; 
+            return resultStr;
         }
     }
 }

@@ -13,14 +13,14 @@ namespace LoadBalancerAPI.Controllers
     public class LoadBalancerController : ControllerBase
     {
         private readonly HttpClient _httpClient;
-        private LoadBalancer _loadBalancer;
+        private readonly LoadBalancer _loadBalancer;
 
         public LoadBalancerController(IHttpClientFactory httpClientFactory, LoadBalancer loadBalancer)
         {
-            // create a client using httpClientFactory injected by app service
+            // httpClientFactory instance injected by app service
             _httpClient = httpClientFactory.CreateClient();
             
-            // use singleton loadbalancer instance injected by app service
+            // singleton loadbalancer instance injected by app service
             _loadBalancer = loadBalancer;
         }
 
