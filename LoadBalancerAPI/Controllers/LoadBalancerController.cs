@@ -34,9 +34,9 @@ namespace LoadBalancerAPI.Controllers
 
         // Load balancer configuration endpoints
         [HttpGet]
-        [Route("{ServiceUrl}")]
+        [Route("{serviceUrl}")]
         public ContentResult AddService(string serviceUrl) {
-            return Content(_loadBalancer.AddService(serviceUrl)+"");
+            return Content(_loadBalancer.AddService(Uri.UnescapeDataString(serviceUrl))+"");
         }
     }
 }
