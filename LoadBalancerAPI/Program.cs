@@ -15,7 +15,7 @@ builder.Services.AddHttpClient();
 
 // Setting load balancer as singleton app service together with a strategy
 builder.Services.AddSingleton<ILoadBalancerStrategy, RoundRobinStrategy>(); 
-builder.Services.AddSingleton(loadBalancer => new LoadBalancer(loadBalancer.GetRequiredService<ILoadBalancerStrategy>()));
+builder.Services.AddSingleton(lb => new LoadBalancer(lb.GetRequiredService<ILoadBalancerStrategy>()));
 
 var app = builder.Build();
 

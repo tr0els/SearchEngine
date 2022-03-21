@@ -17,32 +17,52 @@ namespace LoadBalancerAPI.Controllers
     {
         private ILoadBalancerStrategy _strategy;
         private List<string> _services;
+        private Dictionary<string, ILoadBalancerStrategy> _strategies;
 
         public LoadBalancer(ILoadBalancerStrategy strategy)
         {
-            _services = new List<string>();
             _strategy = strategy;
+            _services = new List<string>();
+            _strategies = new Dictionary<string, ILoadBalancerStrategy>();
 
-            // for dev purposes - add a service to load balancer if list is empty
-            if(_services.Count == 0)
+            // for easy testing set load balancer services and strategies at instantiation
+            if(_services.Count == 0) this.AddService("https://localhost:44307");
+
+            if(_strategies.Count == 0) 
             {
-                this.AddService("https://localhost:44307");
-            } 
+                _strategies.Add("RoundRobinStrategy", new RoundRobinStrategy());
+                _strategies.Add("RandomStrategy", new RandomStrategy());
+            }
+        }
+
+        public List<string> GetAllServices()
+        {
+            return _services;
         }
 
         public int AddService(string url)
         {
             _services.Add(url);
-            return _services.Count;
+            return _services.Count - 1;
         }
-        public void RemoveService(int id)
+        public int RemoveService(int id)
         {
             _services.RemoveAt(id);
+            return id;
+        }
+        public Dictionary<string, ILoadBalancerStrategy> GetAllStrategies()
+        {
+            return _strategies;
         }
 
-        public void SetStrategy(ILoadBalancerStrategy strategy)
+        public ILoadBalancerStrategy GetActiveStrategy()
         {
-            _strategy = strategy;
+            return _strategy;
+        }
+
+        public void SetActiveStrategy(string strategyName)
+        {
+            _strategy = _strategies[strategyName];
         }
 
         public string NextService()
