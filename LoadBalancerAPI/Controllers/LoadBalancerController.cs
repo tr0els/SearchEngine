@@ -32,7 +32,14 @@ namespace LoadBalancerAPI.Controllers
         [HttpGet]
         [Route("DidYouMean")]
         public async Task<IActionResult> DidYouMean()
-            => await ProxyTo(_loadBalancer.NextService() + "/DidYouMean");
+        {
+            var nextService = _loadBalancer.NextService();
+            Console.WriteLine($"{DateTime.Now.TimeOfDay} - Load balancer sending request to DidYouMeanAPI {nextService}");
+            ContentResult contentResult = await ProxyTo(nextService + "/DidYouMean");
+            Console.WriteLine($"{DateTime.Now.TimeOfDay} - Load balancer got response from DidYouMeanAPI {nextService}");
+
+            return contentResult;
+        }
 
         // redirect helper
         private async Task<ContentResult> ProxyTo(string url)
